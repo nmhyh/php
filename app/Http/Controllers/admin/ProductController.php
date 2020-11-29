@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Session;
+use App\Classes\Helper;
 
 class ProductController extends Controller
 {
@@ -38,7 +39,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view($this->viewprefix.'add');
+        $category = Category::all();
+        return view($this->viewprefix.'add',compact('category'));
     }
 
     /**
@@ -52,33 +54,32 @@ class ProductController extends Controller
         $product = new Product();
         $this->validate($request, [
             'name' => 'required',
-            'image' => 'required',
-            'price' => 'required',
-            'size' => 'required',
-            'material' => 'required',
-            'strap_material' => 'required',
-            'number_compartments' => 'required',
-            'dimensions' => 'required',
-            'color' => 'required',
-            'discount' => 'required',
-            'content' => 'required',
             'idcat' => 'required',
         ]);
         $product->name = $request->name;
-        $product->image = $request->image;
         $product->price = $request->price;
         $product->size = $request->size;
         $product->material = $request->material;
         $product->strap_material = $request->strap_material;
+        $product->locktype = $request->locktype;
         $product->number_compartments = $request->number_compartments;
         $product->dimensions = $request->dimensions;
         $product->color = $request->color;
         $product->discount = $request->discount;
         $product->content = $request->content;
         $product->idcat = $request->idcat;
+        $product->image = $request->image;
+        $product->image2 = $request->image2;
+        $product->image3 = $request->image3;
+        $product->save();
+
+        $product->image = Helper::imageUploadProduct($request, 'product', $product->id);
+        $product->image2 = Helper::imageUploadProduct2($request, 'product', $product->id);
+        $product->image3 = Helper::imageUploadProduct3($request, 'product', $product->id);
+
         if($product->save())
             Session::flash('message', 'successfully!');
-        else
+            else
             Session::flash('message', 'Failure!');
         return redirect()->route('admin-product-index');
     }
@@ -92,35 +93,36 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $this->validate($request, [
             'name' => 'required',
-            'image' => 'required',
-            'price' => 'required',
-            'size' => 'required',
-            'material' => 'required',
-            'strap_material' => 'required',
-            'number_compartments' => 'required',
-            'dimensions' => 'required',
-            'color' => 'required',
-            'discount' => 'required',
-            'content' => 'required',
             'idcat' => 'required',
         ]);
         $product->name = $request->name;
-        $product->image = $request->image;
         $product->price = $request->price;
         $product->size = $request->size;
         $product->material = $request->material;
         $product->strap_material = $request->strap_material;
+        $product->locktype = $request->locktype;
         $product->number_compartments = $request->number_compartments;
         $product->dimensions = $request->dimensions;
         $product->color = $request->color;
         $product->discount = $request->discount;
         $product->content = $request->content;
         $product->idcat = $request->idcat;
-        if($products->save())
+        $product->save();
+
+        if($request->hasFile('image')){
+            $product->image = Helper::imageUploadProduct($request, 'product', $product->id);
+        }
+        if($request->hasFile('image2')){
+            $product->image = Helper::imageUploadProduct2($request, 'product', $product->id);
+        }
+        if($request->hasFile('image3')){
+            $product->image = Helper::imageUploadProduct3($request, 'product', $product->id);
+        }
+        if($product->save())
             Session::flash('message', 'successfully!');
         else
             Session::flash('message', 'Failure!');
-        return redirect()->route('admin-product-index');  
+        return redirect()->route('admin-product-index'); 
     }
 
     /**
@@ -171,5 +173,24 @@ class ProductController extends Controller
         else
             Session::flash('message', 'Failure!');
         return redirect()->route('admin-product-index'); 
+    }
+    public function active($id)
+    {
+        $product = Product::findOrFail($id);
+        $product->status = 1;   
+        if($product->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-product-index');        
+    }public function unactive($id)
+    {
+        $product = Product::findOrFail($id); 
+        $product->status = 0;    
+        if($product->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-product-index');       
     }
 }

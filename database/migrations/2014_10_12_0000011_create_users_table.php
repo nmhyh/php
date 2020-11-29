@@ -26,7 +26,8 @@ class CreateUsersTable extends Migration
         // Pass nvarchar(20) not null,
         // TrangThai int not null,
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->Increments('id')->unsigned();
             $table->string('name');
             $table->date('dateofbirth')->nullable();
             $table->string('sex')->nullable();

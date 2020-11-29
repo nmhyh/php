@@ -265,7 +265,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </a>
                     <ul class="sub">
 						<li><a href="{{route('admin-product-index')}}">Danh sách sản phẩm</a></li>
-                        <li><a href="{{route('admin-caterogy-index')}}">Danh sách loại sản phẩm</a></li>
+                        <li><a href="{{route('admin-category-index')}}">Danh sách loại sản phẩm</a></li>
                         <li><a href="grids.html">Grids</a></li>
                     </ul>
                 </li>
@@ -275,24 +275,41 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <span>Tài khoản</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="">Tài khoản của tôi</a></li>
+                        <li><a href="{{route("admin-user-myaccount", Auth::user()->id)}}">Tài khoản của tôi</a></li>
                         <li><a href="{{route("admin-user-index")}}">Tất cả tài khoản</a></li>
                         <li><a href="">Phân quyền</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="{{route("admin-supplier-index")}}">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Nhà cung cấp</span>
+                    </a>
+                </li>
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-tasks"></i>
-                        <span>Form Components</span>
+                        <span>Phiếu nhập</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="form_component.html">Form Elements</a></li>
+                        <li><a href="{{route("admin-receipt-index")}}">Phiếu nhập</a></li>
                         <li><a href="form_validation.html">Form Validation</a></li>
 						<li><a href="dropzone.html">Dropzone</a></li>
                     </ul>
                 </li>
-                
-            </ul>            </div>
+                <li class="sub-menu dcjq-parent-li">
+                    <a href="javascript:;" class="dcjq-parent">
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span>Charts</span>
+                    <span class="dcjq-icon"></span></a>
+                    <ul class="sub" style="display: none;">
+                        <li><a href="chartjs.html">Chart js</a></li>
+                        <li><a href="flot_chart.html">Flot Charts</a></li>
+                    </ul>
+                </li>
+
+            </ul>            
+        </div>
         <!-- sidebar menu end-->
     </div>
 </aside>
@@ -300,18 +317,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--main content start-->
 <section id="main-content">
     <section class="wrapper">
-    <div class="form-w3layouts">
-        <!-- page start-->
-        <!-- page start-->
-        <div class="row">
-            <div class="col-lg-12">
-                @yield('content')
-                <!-- footer -->
-                    
-                <!-- / footer -->
-            </div>
-        </div>
-    </div>
+
+        @yield('content')
+
     </section>
 </section>
 

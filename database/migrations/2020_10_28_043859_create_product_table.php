@@ -32,9 +32,12 @@ class CreateProductTable extends Migration
             $table->Increments('id')->unsigned();
             $table->string('name');
             $table->string('image')->nullable();
-            $table->integer('price');
+            $table->string('image2')->nullable();
+            $table->string('image3')->nullable();
+            $table->float('price')->nullable();
             $table->string('material')->nullable();
             $table->string('strap_material')->nullable();
+            $table->integer('locktype')->nullable();
             $table->string('number_compartments')->nullable();
             $table->string('dimensions')->nullable();
             $table->string('color')->nullable();

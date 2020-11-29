@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Session;
+use App\Classes\Helper;
+
 class CategoryController extends Controller
 {
     /**
@@ -49,17 +51,19 @@ class CategoryController extends Controller
         $category = new Category();
         $this->validate($request, [
             'name' => 'required',
-            'image' => 'required',
-            'content' => 'required',
         ]);
         $category->name = $request->name;
         $category->image = $request->image;
         $category->content = $request->content;
+        $category->save();
+        
+        $category->image = Helper::imageUpload($request, 'category', $category->id);
+
         if($category->save())
-            Session::flash('message', 'successfully!');
+        Session::flash('message', 'successfully!');
         else
-            Session::flash('message', 'Failure!');
-        return redirect()->route('admin-caterogy-index');   
+        Session::flash('message', 'Failure!');
+        return redirect()->route('admin-category-index');   
     }
     public function imageUpload(Request $request)
     {
@@ -103,18 +107,21 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $this->validate($request, [
-            'name' => 'required',
-            'image' => 'required',
-            'content' => 'required',
+            'name' => 'required',    
         ]);
         $category->name = $request->name;
-        $category->image = $request->image;
         $category->content = $request->content;
+        $category->save();
+
+        if($request->hasFile('image')){
+            $category->image = Helper::imageUpload($request, 'category', $category->id);
+        }
+
         if($category->save())
             Session::flash('message', 'successfully!');
         else
             Session::flash('message', 'Failure!');
-        return redirect()->route('admin-caterogy-index');  
+        return redirect()->route('admin-category-index');
     }
     // public function edit(Category $category)
     // {
@@ -146,6 +153,27 @@ class CategoryController extends Controller
             Session::flash('message', 'successfully!');
         else
             Session::flash('message', 'Failure!');
-        return redirect()->route('admin-caterogy-index');
+        return redirect()->route('admin-category-index');
+    }
+    public function active($id)
+    {
+        $category = Category::findOrFail($id);
+        $category->status = 1;   
+        if($category->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-category-index');        
+    }
+    
+    public function unactive($id)
+    {
+        $category = Category::findOrFail($id); 
+        $category->status = 0;    
+        if($category->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-category-index');       
     }
 }
