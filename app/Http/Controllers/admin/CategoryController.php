@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use App\Models\Category;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Session;
 use App\Classes\Helper;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -175,5 +178,18 @@ class CategoryController extends Controller
         else
             Session::flash('message', 'Failure!');
         return redirect()->route('admin-category-index');       
+    }
+
+    // hàm client
+    public function show_category($id)
+    {
+        $category = DB::table('category')->where('status', '1')->get();
+        $supplier = DB::table('supplier')->where('status', '1')->get();
+
+        $category_by_id = DB::table('product')->select('product.name', 'product.image', 'product.id', 'product.price')->join('category','product.idcat', '=', 'category.id')->where('product.idcat', $id)->get();
+
+        $category_name = DB::table('category')->where('category.id', $id)->limit(1)->get();
+
+        return view('client.home.show_category')->with('category', $category)->with('supplier', $supplier)->with('category_by_id', $category_by_id)->with('category_name', $category_name);
     }
 }

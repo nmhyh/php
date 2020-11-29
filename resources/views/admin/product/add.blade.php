@@ -54,10 +54,11 @@
         <div class="form-group">
           <label for="locktype">Lock type:</label>
           <select class="form-control" name="locktype" id="locktype">
-            <option value="0" >Nút cài</option>
-            <option value="1" >Khóa kéo</option>
-            <option value="2" >Khóa đẩy</option>
-            <option value="3" >Khóa khớp</option>
+            <option value="0" >Nút Cài</option>
+            <option value="1" >Nút Bấm</option>
+            <option value="2" >Khóa Kéo</option>
+            <option value="3" >Khóa Đẩy</option>
+            <option value="4" >Khóa Khớp</option>
           </select>
         </div>
         <div class="form-group">

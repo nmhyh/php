@@ -5,9 +5,11 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Session;
 use App\Classes\Helper;
+use DB;
 
 class ProductController extends Controller
 {
@@ -193,4 +195,26 @@ class ProductController extends Controller
             Session::flash('message', 'Failure!');
         return redirect()->route('admin-product-index');       
     }
+
+    // Hàm client
+    public function product_detail($id)
+    {
+        $category = DB::table('category')->where('status', '1')->get();
+        $supplier = DB::table('supplier')->where('status', '1')->get();
+
+        $product_detail = DB::table('product')->select('product.id', 'product.name', 'product.image','product.image2','product.image3','product.color','product.size', 'product.price','product.material','product.strap_material','product.locktype','product.number_compartments', 'product.dimensions','product.discount','product.content')->join('category', 'category.id', '=', 'product.idcat')->join('supplier', 'supplier.id', '=', 'product.idsup')->where('product.id', $id)->get();
+
+        $cates_id = DB::table('product')->select('category.id')->join('category', 'category.id', '=', 'product.idcat')->join('supplier', 'supplier.id', '=', 'product.idsup')->where('product.id', $id)->get();
+
+        foreach($cates_id as $value){
+            $category_id = $value->id;
+        }
+
+        $related_product = DB::table('product')->select('product.id', 'product.name', 'product.image','product.price',)->join('category', 'category.id', '=', 'product.idcat')->join('supplier', 'supplier.id', '=', 'product.idsup')->where('category.id', $category_id)->whereNotIn('product.id', [$id])->limit(4)->get();
+
+        
+
+        return view('client.home.product_detail')->with('category', $category)->with('supplier', $supplier)->with('product_detail', $product_detail)->with('related_product', $related_product);
+    }
+
 }

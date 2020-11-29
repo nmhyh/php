@@ -11,12 +11,23 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/index', function () {
-    return view('client.home.index');
-});
-Route::get('/shop', function () {
-    return view('client.home.shop');
-});
+// Route::get('/index', function () {
+//     return view('client.home.index');
+// });
+// Route::get('/shop', function () {
+//     return view('client.home.shop');
+// });
+
+Route::get('/index', 'Client\HomeController@index')->name('get-client-index');
+Route::get('/shop', 'Client\HomeController@shop')->name('get-client-shop');
+// lọc sản phẩm
+Route::get('/shop/category/{id}', 'Admin\CategoryController@show_category')->name('get-client-shop-category');
+
+Route::get('/shop/supplier/{id}', 'Admin\SupplierController@show_supplier')->name('get-client-shop-supplier');
+
+Route::get('/shop/product_detail/{id}', 'Admin\ProductController@product_detail')->name('get-client-shop-product_detail');
+
+
 
 
 //Login

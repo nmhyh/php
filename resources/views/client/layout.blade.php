@@ -1,314 +1,293 @@
 <!doctype html>
-<html class="no-js" lang="zxx">
+<html lang="zxx">
+
 <head>
+    <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Fashion | Teamplate</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('client_asset/assets/img/favicon.ico')}}">
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/owl.carousel.min.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/slicknav.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/flaticon.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/progressbar_barfiller.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/gijgo.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/animate.min.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/animated-headline.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/fontawesome-all.min.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/themify-icons.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/nice-select.css')}}">
-    <link rel="stylesheet" href="{{asset('client_asset/assets/css/style.css')}}">
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>winter</title>
+    <link rel="icon" href="{{asset('client_asset/img/favicon.png')}}">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{asset('client_asset/css/bootstrap.min.css')}}">
+    <!-- animate CSS -->
+    <link rel="stylesheet" href="{{asset('client_asset/css/animate.css')}}">
+    <!-- owl carousel CSS -->
+    <link rel="stylesheet" href="{{asset('client_asset/css/owl.carousel.min.css')}}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{{asset('client_asset/css/all.css')}}">
+    <!-- flaticon CSS -->
+    <link rel="stylesheet" href="{{asset('client_asset/css/flaticon.css')}}">
+    <link rel="stylesheet" href="{{asset('client_asset/css/themify-icons.css')}}">
+    <!-- font awesome CSS -->
+    <link rel="stylesheet" href="{{asset('client_asset/css/magnific-popup.css')}}">
+    <!-- swiper CSS -->
+    <link rel="stylesheet" href="{{asset('client_asset/css/slick.css')}}">
+    <!-- style CSS -->
+    <link rel="stylesheet" href="{{asset('client_asset/css/style.css')}}">
 </head>
-<body class="full-wrapper">
-    <!-- ? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="{{asset('client_asset/assets/img/logo/loder.png')}}" alt="">
+
+<body>
+    <!--::header part start::-->
+    <header class="main_menu home_menu">
+        <div class="container-fluid">
+            <div class="row align-items-center justify-content-center">
+                <div class="col-lg-11">
+                    <nav class="navbar navbar-expand-lg navbar-light">
+                        <a class="navbar-brand" href="{{route("get-client-index")}}"> <img src="{{asset('client_asset/img/logo.png')}}" alt="logo"> </a>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="menu_icon"><i class="fas fa-bars"></i></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse main-menu-item" id="navbarSupportedContent">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{route("get-client-index")}}">Trang Chủ</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="{{route("get-client-shop")}}" id="navbarDropdown_1"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Shop
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+                                        <a class="dropdown-item" href="category.html"> shop category</a>
+                                        <a class="dropdown-item" href="single-product.html">product details</a>
+                                        
+                                    </div>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_3"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        pages
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                        <a class="dropdown-item" href="login.html"> 
+                                            login
+                                            
+                                        </a>
+                                        <a class="dropdown-item" href="tracking.html">tracking</a>
+                                        <a class="dropdown-item" href="checkout.html">product checkout</a>
+                                        <a class="dropdown-item" href="cart.html">shopping cart</a>
+                                        <a class="dropdown-item" href="confirmation.html">confirmation</a>
+                                        <a class="dropdown-item" href="elements.html">elements</a>
+                                    </div>
+                                </li>
+                                
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="blog.html" id="navbarDropdown_2"
+                                        role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        blog
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_2">
+                                        <a class="dropdown-item" href="blog.html"> blog</a>
+                                        <a class="dropdown-item" href="single-blog.html">Single blog</a>
+                                    </div>
+                                </li>
+                                
+                                <li class="nav-item">
+                                    <a class="nav-link" href="contact.html">Contact</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="hearer_icon d-flex">
+                            <div class="dropdown cart">
+                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="ti-bag"></i>
+                                </a>
+                                <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <div class="single_product">
+    
+                                    </div>
+                                </div> -->
+                            </div>
+                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
+                        </div>
+                    </nav>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- Preloader Start-->
-    <header>
-        <!-- Header Start -->
-        <div class="header-area ">
-            <div class="main-header header-sticky">
-                <div class="container-fluid">
-                    <div class="menu-wrapper d-flex align-items-center justify-content-between">
-                        <div class="header-left d-flex align-items-center">
-                            <!-- Logo -->
-                            <div class="logo">
-                                <a href="index.html"><img src="{{asset('client_asset/assets/img/logo/logo.png')}}" alt=""></a>
-                            </div>
-                            <!-- Main-menu -->
-                            <div class="main-menu  d-none d-lg-block">
-                                <nav>
-                                    <ul id="navigation">
-                                        <li><a href="index.html">Home</a></li> 
-                                        <li><a href="shop.html">shop</a></li>
-                                        <li><a href="about.html">About</a></li>
-                                        <li><a href="blog.html">Blog</a>
-                                            <ul class="submenu">
-                                                <li><a href="blog.html">Blog</a></li>
-                                                <li><a href="blog_details.html">Blog Details</a></li>
-                                                <li><a href="elements.html">Elements</a></li>
-                                                <li><a href="product_details.html">Product Details</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="contact.html">Contact</a></li>
-                                    </ul>
-                                </nav>
-                            </div>   
-                        </div>
-                        <div class="header-right1 d-flex align-items-center">
-                            <!-- Social -->
-                            <div class="header-social d-none d-md-block">
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                            </div>
-                            <!-- Search Box -->
-                            <div class="search d-none d-md-block">
-                                <ul class="d-flex align-items-center">
-                                    <li class="mr-15">
-                                        <div class="nav-search search-switch">
-                                            <i class="ti-search"></i>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="card-stor">
-                                            <img src="{{asset('client_asset/assets/img/gallery/card.svg')}}" alt="">
-                                            <span>0</span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Mobile Menu -->
-                        <div class="col-12">
-                            <div class="mobile_menu d-block d-lg-none"></div>
-                        </div>
-                    </div>
-                </div>
+        <div class="search_input" id="search_input_box">
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
             </div>
         </div>
-        <!-- Header End -->
     </header>
-    <main>
-        @yield('content')
-        <div class="categories-area section-padding40 gray-bg">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat mb-50 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".2s">
-                            <div class="cat-icon">
-                                <img src="{{asset('client_asset/assets/img/icon/services1.svg')}}" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5>Fast & Free Delivery</h5>
-                                <p>Free delivery on all orders</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat mb-50 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".2s">
-                            <div class="cat-icon">
-                                <img src="{{asset('client_asset/assets/img/icon/services2.svg')}}" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5>Fast & Free Delivery</h5>
-                                <p>Free delivery on all orders</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat mb-30 wow fadeInUp" data-wow-duration="1s" data-wow-delay=".4s">
-                            <div class="cat-icon">
-                                <img src="{{asset('client_asset/assets/img/icon/services3.svg')}}" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5>Fast & Free Delivery</h5>
-                                <p>Free delivery on all orders</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6">
-                        <div class="single-cat wow fadeInUp" data-wow-duration="1s" data-wow-delay=".5s">
-                            <div class="cat-icon">
-                                <img src="{{asset('client_asset/assets/img/icon/services4.svg')}}" alt="">
-                            </div>
-                            <div class="cat-cap">
-                                <h5>Fast & Free Delivery</h5>
-                                <p>Free delivery on all orders</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--? Services Area End -->
-    </main>
-    <footer>
-        <!-- Footer Start-->
-        <div class="footer-area footer-padding">
-            <div class="container-fluid ">
-                <div class="row d-flex justify-content-between">
-                    <div class="col-xl-3 col-lg-3 col-md-8 col-sm-8">
-                     <div class="single-footer-caption mb-50">
-                       <div class="single-footer-caption mb-30">
-                          <!-- logo -->
-                          <div class="footer-logo mb-35">
-                           <a href="index.html"><img src="{{asset('client_asset/assets/img/logo/logo2_footer.png')}}" alt=""></a>
-                       </div>
-                       <div class="footer-tittle">
-                           <div class="footer-pera">
-                               <p>Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla.</p>
-                           </div>
-                       </div>
-                       <!-- social -->
-                       <div class="footer-social">
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
-            <div class="single-footer-caption mb-50">
-                <div class="footer-tittle">
-                    <h4>Quick links</h4>
-                    <ul>
-                        <li><a href="#">Image Licensin</a></li>
-                        <li><a href="#">Style Guide</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
-            <div class="single-footer-caption mb-50">
-                <div class="footer-tittle">
-                    <h4>Shop Category</h4>
-                    <ul>
-                        <li><a href="#">Image Licensin</a></li>
-                        <li><a href="#">Style Guide</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-2 col-md-4 col-sm-4">
-            <div class="single-footer-caption mb-50">
-                <div class="footer-tittle">
-                    <h4>Pertners</h4>
-                    <ul>
-                        <li><a href="#">Image Licensin</a></li>
-                        <li><a href="#">Style Guide</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-4">
-            <div class="single-footer-caption mb-50">
-                <div class="footer-tittle">
-                    <h4>Get in touch</h4>
-                    <ul>
-                        <li><a href="#">(89) 982-278 356</a></li>
-                        <li><a href="#">demo@colorlib.com</a></li>
-                        <li><a href="#">67/A, Colorlib, Green road, NYC</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    </div>
-    </div>
-    <!-- footer-bottom area -->
-    <div class="footer-bottom-area">
+    
+    @yield('content')
+
+    <section class="shipping_details section_padding">
         <div class="container">
-            <div class="footer-border">
-               <div class="row d-flex align-items-center">
-                   <div class="col-xl-12 ">
-                       <div class="footer-copy-right text-center">
-                           <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                              Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </div>
-      <!-- Footer End-->
-    </footer>
-    <!--? Search model Begin -->
-    <div class="search-model-box">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-btn">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Searching key.....">
-            </form>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="{{asset('client_asset/img/icon/icon_1.png')}}" alt="">
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="{{asset('client_asset/img/icon/icon_2.png')}}" alt="">
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="{{asset('client_asset/img/icon/icon_3.png')}}" alt="">
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="single_shopping_details">
+                        <img src="{{asset('client_asset/img/icon/icon_4.png')}}" alt="">
+                        <h4>Free shipping</h4>
+                        <p>Divided face for bearing the divide unto seed winged divided light Forth.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <!-- Search model end -->
-    <!-- Scroll Up -->
-    <div id="back-top" >
-        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-    </div>
-    
-    <!-- JS here -->
-    <!-- Jquery, Popper, Bootstrap -->
-    <script src="{{asset('client_asset/assets/js/vendor/modernizr-3.5.0.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/popper.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/bootstrap.min.js')}}"></script>
-    
-    <!-- Slick-slider , Owl-Carousel ,slick-nav -->
-    <script src="{{asset('client_asset/assets/js/owl.carousel.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/slick.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/jquery.slicknav.min.js')}}"></script>
-    
-    <!-- One Page, Animated-HeadLin, Date Picker -->
-    <script src="{{asset('client_asset/assets/js/wow.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/animated.headline.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/jquery.magnific-popup.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/gijgo.min.js')}}"></script>
-    
-    <!-- Nice-select, sticky,Progress -->
-    <script src="{{asset('client_asset/assets/js/jquery.nice-select.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/jquery.sticky.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/jquery.barfiller.js')}}"></script>
-    
-    <!-- counter , waypoint,Hover Direction -->
-    <script src="{{asset('client_asset/assets/js/jquery.counterup.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/waypoints.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/jquery.countdown.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/hover-direction-snake.min.js')}}"></script>
-    
-    <!-- contact js -->
-    <script src="{{asset('client_asset/assets/js/contact.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/jquery.form.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/jquery.validate.min.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/mail-script.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/jquery.ajaxchimp.min.js')}}"></script>
-    
-    <!-- Jquery Plugins, main Jquery -->	
-    <script src="{{asset('client_asset/assets/js/plugins.js')}}"></script>
-    <script src="{{asset('client_asset/assets/js/main.js')}}"></script>
-    
+    </section>
+    <!-- free shipping end -->
+
+    <!-- subscribe_area part start-->
+    <section class="instagram_photo">
+        <div class="container-fluid>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="instagram_photo_iner">
+                        <div class="single_instgram_photo">
+                            <img src="{{asset('client_asset/img/instagram/inst_1.png')}}" alt="">
+                            <a href="#"><i class="ti-instagram"></i></a> 
+                        </div>
+                        <div class="single_instgram_photo">
+                            <img src="{{asset('client_asset/img/instagram/inst_2.png')}}" alt="">
+                            <a href="#"><i class="ti-instagram"></i></a> 
+                        </div>
+                        <div class="single_instgram_photo">
+                            <img src="{{asset('client_asset/img/instagram/inst_3.png')}}" alt="">
+                            <a href="#"><i class="ti-instagram"></i></a> 
+                        </div>
+                        <div class="single_instgram_photo">
+                            <img src="{{asset('client_asset/img/instagram/inst_4.png')}}" alt="">
+                            <a href="#"><i class="ti-instagram"></i></a> 
+                        </div>
+                        <div class="single_instgram_photo">
+                            <img src="{{asset('client_asset/img/instagram/inst_5.png')}}" alt="">
+                            <a href="#"><i class="ti-instagram"></i></a> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--::subscribe_area part end::-->
+
+    <!--::footer_part start::-->
+    <footer class="footer_part">
+        <div class="container">
+            <div class="row justify-content-between">
+                <div class="col-sm-6 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Category</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">Male</a></li>
+                            <li><a href="#">Female</a></li>
+                            <li><a href="#">Shoes</a></li>
+                            <li><a href="#">Fashion</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-2">
+                    <div class="single_footer_part">
+                        <h4>Company</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="">About</a></li>
+                            <li><a href="">News</a></li>
+                            <li><a href="">FAQ</a></li>
+                            <li><a href="">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-3">
+                    <div class="single_footer_part">
+                        <h4>Address</h4>
+                        <ul class="list-unstyled">
+                            <li><a href="#">200, Green block, NewYork</a></li>
+                            <li><a href="#">+10 456 267 1678</a></li>
+                            <li><span>contact89@winter.com</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-lg-4">
+                    <div class="single_footer_part">
+                        <h4>Newsletter</h4>
+                        <div id="mc_embed_signup">
+                            <form target="_blank"
+                                action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                                method="get" class="subscribe_form relative mail_part">
+                                <input type="email" name="email" id="newsletter-form-email" placeholder="Email Address"
+                                    class="placeholder hide-on-focus" onfocus="this.placeholder = ''"
+                                    onblur="this.placeholder = ' Email Address '">
+                                <button type="submit" name="submit" id="newsletter-submit"
+                                    class="email_icon newsletter-submit button-contactForm">subscribe</button>
+                                <div class="mt-10 info"></div>
+                            </form>
+                        </div>
+                        <div class="social_icon">
+                            <a href="#"><i class="ti-facebook"></i></a>
+                            <a href="#"><i class="ti-twitter-alt"></i></a>
+                            <a href="#"><i class="ti-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-12">
+                    <div class="copyright_text">
+                        <P>Copyright &copy;
+                            <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="ti-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                        </P>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!--::footer_part end::-->
+
+    <!-- jquery plugins here-->
+    <script src="{{asset('client_asset/js/jquery-1.12.1.min.js')}}"></script>
+    <!-- popper js -->
+    <script src="{{asset('client_asset/js/popper.min.js')}}"></script>
+    <!-- bootstrap js -->
+    <script src="{{asset('client_asset/js/bootstrap.min.js')}}"></script>
+    <!-- easing js -->
+    <script src="{{asset('client_asset/js/jquery.magnific-popup.js')}}"></script>
+    <!-- swiper js -->
+    <script src="{{asset('client_asset/js/swiper.min.js')}}"></script>
+    <!-- swiper js -->
+    <script src="{{asset('client_asset/js/mixitup.min.js')}}"></script>
+    <!-- particles js -->
+    <script src="{{asset('client_asset/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('client_asset/js/jquery.nice-select.min.js')}}"></script>
+    <!-- slick js -->
+    <script src="{{asset('client_asset/js/slick.min.js')}}"></script>
+    <script src="{{asset('client_asset/js/jquery.counterup.min.js')}}"></script>
+    <script src="{{asset('client_asset/js/waypoints.min.js')}}"></script>
+    <script src="{{asset('client_asset/js/contact.js')}}"></script>
+    <script src="{{asset('client_asset/js/jquery.ajaxchimp.min.js')}}"></script>
+    <script src="{{asset('client_asset/js/jquery.form.js')}}"></script>
+    <script src="{{asset('client_asset/js/jquery.validate.min.js')}}"></script>
+    <script src="{{asset('client_asset/js/mail-script.js')}}"></script>
+    <!-- custom js -->
+    <script src="{{asset('client_asset/js/custom.js')}}"></script>
 </body>
+
 </html>
-
-

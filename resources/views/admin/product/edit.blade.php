@@ -53,14 +53,15 @@
       <div class="form-group">
         <label for="locktype">Lock type:</label>
         <select class="form-control" name="locktype" value="{{$product->locktype}}">
-          <option value="0" >Nút cài</option>
-          <option value="1" >Khóa kéo</option>
-          <option value="2" >Khóa đẩy</option>
-          <option value="3" >Khóa khớp</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="number_compartments">Number compartments:</label>
+          <select class="form-control" name="locktype" id="locktype">
+            <option value="0" >Nút cài</option>
+            <option value="1" >Nút Bấm</option>
+            <option value="2" >Khóa kéo</option>
+            <option value="3" >Khóa đẩy</option>
+            <option value="4" >Khóa khớp</option>
+          </select>
+        </select> 
+         <label for="number_compartments">Number compartments:</label>
         <input type="text" class="form-control" name="number_compartments" value="{{$product->number_compartments}}">
       </div>
       <div class="form-group">

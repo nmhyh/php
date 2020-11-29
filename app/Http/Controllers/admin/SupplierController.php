@@ -3,9 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
+use App\Models\Category;
 use App\Models\Supplier;
 use Illuminate\Http\Request;
 use Session;
+use App\Classes\Helper;
+use DB;
 
 class SupplierController extends Controller
 {
@@ -148,5 +152,19 @@ class SupplierController extends Controller
         else
             Session::flash('message', 'Failure!');
         return redirect()->route('admin-supplier-index');       
+    }
+
+    //Hàm client
+    
+    public function show_supplier($id)
+    {
+        $category = DB::table('category')->where('status', '1')->get();
+        $supplier = DB::table('supplier')->where('status', '1')->get();
+
+        $supplier_by_id = DB::table('product')->select('product.name', 'product.image', 'product.id', 'product.price')->join('supplier','product.idsup', '=', 'supplier.id')->where('product.idsup', $id)->get();
+
+        $supplier_name = DB::table('supplier')->where('supplier.id', $id)->limit(1)->get();
+
+        return view('client.home.show_supplier')->with('category', $category)->with('supplier', $supplier)->with('supplier_by_id', $supplier_by_id)->with('supplier_name', $supplier_name);
     }
 }
