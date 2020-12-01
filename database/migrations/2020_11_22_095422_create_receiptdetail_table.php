@@ -13,7 +13,9 @@ class CreateReceiptdetailTable extends Migration
      */
     public function up()
     {
-        Schema::create('receiptdetail', function (Blueprint $table) {        
+        Schema::create('receiptdetail', function (Blueprint $table) { 
+            $table->engine = "InnoDB";
+            $table->Increments('id')->unsigned();       
             $table->timestamps();
             $table->integer('quantity')->nullable();
             $table->float('price')->nullable();            
@@ -21,7 +23,7 @@ class CreateReceiptdetailTable extends Migration
             $table->foreign('id_receipt')->references('id')->on('receipt');
             $table->integer('id_product')->unsigned()->nullable();
             $table->foreign('id_product')->references('id')->on('product');
-            $table->primary('id_receipt','id_product');
+           
         });
     }
 

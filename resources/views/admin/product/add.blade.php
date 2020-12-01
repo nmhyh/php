@@ -16,6 +16,22 @@
             </select>
         </div>
         <div class="form-group">
+          <label for="idbra">Brand:</label>
+            <select name="idbra" class="form-control">
+                @foreach ($brand as $key =>$bra)
+                <option value="{{$bra->id}}">{{($key+1).'. '.$bra->name}}</option>   
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+          <label for="idsize">Size:</label>
+            <select name="idsize" class="form-control">
+                @foreach ($size as $key =>$s)
+                <option value="{{$s->id}}">{{($key+1).'. '.$s->name}}</option>   
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
           <label for="name">Name:</label>
           <input type="text" class="form-control" name="name" required>
         </div>
@@ -34,14 +50,6 @@
         <div class="form-group">
           <label for="price">Price:</label>
           <input type="number" class="form-control"name="price">
-        </div>
-        <div class="form-group">
-          <label for="size">Size:</label>
-          <select class="form-control" name="size" id="size">
-            <option value="0" >S</option>
-            <option value="1" >M</option>
-            <option value="2" >L</option>
-          </select>
         </div>
         <div class="form-group">
           <label for="material">Material:</label>

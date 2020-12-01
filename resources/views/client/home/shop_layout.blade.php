@@ -42,29 +42,26 @@
                         </div>
                         <div class="widgets_inner">
                             <ul class="list">
-                                @foreach($supplier as $sup)
+                                @foreach($brand as $bra)
                                 <li>
-                                    <a href="{{route("get-client-shop-supplier", $sup->id)}}">{{$sup->name}}</a>
+                                    <a href="{{route("get-client-shop-brand", $bra->id)}}">{{$bra->name}}</a>
                                 </li>
                                 @endforeach
                             </ul>
                         </div>
                     </aside>
+
                     <aside class="left_widgets p_filter_widgets sidebar_box_shadow">
                         <div class="l_w_title">
-                            <h3>Màu</h3>
+                            <h3>Size</h3>
                         </div>
                         <div class="widgets_inner">
                             <ul class="list">
+                                @foreach($size as $siz)
                                 <li>
-                                    <a href="#">Đỏ</a>
+                                    <a href="{{route("get-client-shop-size", $siz->id)}}">{{$siz->name}}</a>
                                 </li>
-                                <li>
-                                    <a href="#">Đen</a>
-                                </li>
-                                <li>
-                                    <a href="#">Trắng</a>
-                                </li>
+                                @endforeach
                             </ul>
                         </div>
                     </aside>                    

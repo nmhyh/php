@@ -18,7 +18,7 @@ class ReceiptController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('CheckAdminLogin');
+        // $this->middleware('CheckAdminLogin');
         $this->viewprefix='admin.receipt.';
         $this->viewnamespace='admin/receipt';
     }

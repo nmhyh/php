@@ -6,7 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Supplier;
+use App\Models\Brand;
+use App\Models\Size;
 use DB;
 
 class HomeController extends Controller
@@ -19,8 +20,9 @@ class HomeController extends Controller
     public function shop(){
         $product = DB::table('product')->where('status', '1')->get();
         $category = DB::table('category')->where('status', '1')->get();
-        $supplier = DB::table('supplier')->where('status', '1')->get();
-        return View('client.home.shop')->with('product', $product)->with('category', $category)->with('supplier', $supplier);
+        $brand = DB::table('brand')->where('status', '1')->get();
+        $size = DB::table('size')->where('status', '1')->get();
+        return View('client.home.shop_layout')->with('product', $product)->with('category', $category)->with('brand', $brand)->with('size', $size);
     }
     
 }

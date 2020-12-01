@@ -5,7 +5,8 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Supplier;
+use App\Models\Brand;
+use App\Models\Size;
 use Illuminate\Http\Request;
 use Session;
 use App\Classes\Helper;
@@ -24,7 +25,7 @@ class ProductController extends Controller
     public $middleware;
     public function __construct()
     {
-        $this->middleware('CheckAdminLogin');
+        // $this->middleware('CheckAdminLogin');
         $this->viewprefix='admin.product.';
         $this->viewnamespace='admin/product';
     }
@@ -42,7 +43,9 @@ class ProductController extends Controller
     public function create()
     {
         $category = Category::all();
-        return view($this->viewprefix.'add',compact('category'));
+        $brand = Brand::all();
+        $size = Size::all();
+        return view($this->viewprefix.'add',compact('category', 'brand', 'size'));
     }
 
     /**
@@ -70,6 +73,8 @@ class ProductController extends Controller
         $product->discount = $request->discount;
         $product->content = $request->content;
         $product->idcat = $request->idcat;
+        $product->idbra = $request->idbra;
+        $product->idsize = $request->idsize;
         $product->image = $request->image;
         $product->image2 = $request->image2;
         $product->image3 = $request->image3;
@@ -87,8 +92,11 @@ class ProductController extends Controller
     }
     public function getedit($id)
     {
+        $category = Category::all();
+        $brand = Brand::all();
+        $size = Size::all();
         $products = Product::findOrFail($id);
-        return view($this->viewprefix.'edit')->with('product', $products);      
+        return view($this->viewprefix.'edit')->with('product', $products)->with('category', $category)->with('brand', $brand)->with('size', $size);      
     }
     public function postedit($id, request $request)
     {
@@ -109,6 +117,8 @@ class ProductController extends Controller
         $product->discount = $request->discount;
         $product->content = $request->content;
         $product->idcat = $request->idcat;
+        $product->idbra = $request->idbra;
+        $product->idsize = $request->idsize;
         $product->save();
 
         if($request->hasFile('image')){
@@ -200,21 +210,22 @@ class ProductController extends Controller
     public function product_detail($id)
     {
         $category = DB::table('category')->where('status', '1')->get();
-        $supplier = DB::table('supplier')->where('status', '1')->get();
+        $brand = DB::table('brand')->where('status', '1')->get();
 
-        $product_detail = DB::table('product')->select('product.id', 'product.name', 'product.image','product.image2','product.image3','product.color','product.size', 'product.price','product.material','product.strap_material','product.locktype','product.number_compartments', 'product.dimensions','product.discount','product.content')->join('category', 'category.id', '=', 'product.idcat')->join('supplier', 'supplier.id', '=', 'product.idsup')->where('product.id', $id)->get();
+        $product_detail = DB::table('product')->select('product.id', 'product.name', 'product.image','product.image2','product.image3','product.color','product.idsize', 'product.price','product.material','product.strap_material','product.locktype','product.number_compartments', 'product.dimensions','product.discount','product.content')->join('category', 'category.id', '=', 'product.idcat')->join('brand', 'brand.id', '=', 'product.idbra')->where('product.id', $id)->get();
 
-        $cates_id = DB::table('product')->select('category.id')->join('category', 'category.id', '=', 'product.idcat')->join('supplier', 'supplier.id', '=', 'product.idsup')->where('product.id', $id)->get();
+        $cates_id = DB::table('product')->select('category.id')->join('category', 'category.id', '=', 'product.idcat')->join('brand', 'brand.id', '=', 'product.idbra')->where('product.id', $id)->get();
 
         foreach($cates_id as $value){
             $category_id = $value->id;
         }
 
-        $related_product = DB::table('product')->select('product.id', 'product.name', 'product.image','product.price',)->join('category', 'category.id', '=', 'product.idcat')->join('supplier', 'supplier.id', '=', 'product.idsup')->where('category.id', $category_id)->whereNotIn('product.id', [$id])->limit(4)->get();
+        // $related_product = DB::table('product')->select('product.id', 'product.name', 'product.image','product.price',)->join('category', 'category.id', '=', 'product.idcat')->join('brand', 'brand.id', '=', 'product.idbra')->where('category.id', $category_id)->whereNotIn('product.id', [$id])->limit(4)->get();
 
+        $related_product = DB::table('product')->select('product.id', 'product.name', 'product.image','product.price',)->join('category', 'category.id', '=', 'product.idcat')->join('brand', 'brand.id', '=', 'product.idbra')->join('size', 'size.id', '=', 'product.idsize')->where('category.id', $category_id)->whereNotIn('product.id', [$id])->limit(4)->get();
         
 
-        return view('client.home.product_detail')->with('category', $category)->with('supplier', $supplier)->with('product_detail', $product_detail)->with('related_product', $related_product);
+        return view('client.home.product_detail')->with('category', $category)->with('brand', $brand)->with('product_detail', $product_detail)->with('related_product', $related_product);
     }
 
 }

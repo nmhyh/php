@@ -76,8 +76,7 @@
     </div>
     <!-- footer -->
     <footer class="panel-footer">
-      <div class="row">
-          
+      <div class="row">          
           <div class="col-sm-5 text-center">
           <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
           </div>

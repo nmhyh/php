@@ -18,6 +18,7 @@ class Product extends Model
         'size',
         'material',
         'strap_material',
+        'quantity',
         'locktype',
         'number_compartments',
         'dimensions',
@@ -25,5 +26,7 @@ class Product extends Model
         'discount',
         'content',
         'idcat',
+        'idbra',
+        'idsize',
     ];
 }

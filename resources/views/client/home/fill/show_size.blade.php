@@ -1,11 +1,11 @@
 @extends('client.home.shop_layout')
 @section('content1')
 <div class="col-lg-9">
-    @foreach($supplier_name as $name)
-    <h2 style="text-align: center;">{{$name->name}}</h2>
+    @foreach($size_name as $name)
+    <h2 style="text-align: center;">SIZE: {{$name->name}}</h2>
     @endforeach
     <div class="row">
-        @foreach($supplier_by_id as $pro)
+        @foreach($size_by_id as $pro)
         <a href="{{route("get-client-shop-product_detail", $pro->id)}}" style="width: 0;height: 0;">
             <div class="col-lg-4 col-sm-6">
                 <div class="single_category_product">

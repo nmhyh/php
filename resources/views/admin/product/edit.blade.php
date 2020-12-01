@@ -7,9 +7,37 @@
     </div>
     <form action="{{route('admin-product-postedit', $product->id)}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
+        <div class="form-group">
+          <label for="idcat">Category:</label>
+             <select name="idcat" class="form-control">
+                 @foreach ($category as $cate)
+                 <option value="{{$cate->id}}">{{$cate->name}}</option>                     
+                 @endforeach
+             </select>
+        </div>
+        <div class="form-group">
+          <label for="idbra">Brand:</label>
+             <select name="idbra" class="form-control">
+                 @foreach ($brand as $bra)
+                 <option value="{{$bra->id}}">{{$bra->name}}</option>                     
+                 @endforeach
+             </select>
+        </div>
+        <div class="form-group">
+          <label for="idsize">Size:</label>
+             <select name="idsize" class="form-control">
+                 @foreach ($size as $s)
+                 <option value="{{$s->id}}">{{$s->name}}</option>                     
+                 @endforeach
+             </select>
+        </div>
       <div class="form-group">
-        <label for="idcat">Category:</label>
-        <input type="text" class="form-control" name="idcat" value="{{$product->idcat}}">
+        <label for="idbra">Brand:</label>
+        <input type="text" class="form-control" name="idbra" value="{{$product->idbra}}">
+      </div>
+      <div class="form-group">
+        <label for="idsize">Size:</label>
+        <input type="text" class="form-control" name="idsize" value="{{$product->idsize}}">
       </div>
       <div class="form-group">
         <label for="name">Name:</label>
@@ -35,14 +63,6 @@
         <input type="number" class="form-control"name="price" value="{{$product->price}}">
       </div>
       <div class="form-group">
-        <label for="size">Size:</label>
-        <select class="form-control" name="size" value="{{$product->size}}">
-          <option value="0" >S</option>
-          <option value="1" >M</option>
-          <option value="2" >L</option>
-        </select>
-      </div>
-      <div class="form-group">
         <label for="material">Material:</label>
         <input type="text" class="form-control" name="material" value="{{$product->material}}">
       </div>
@@ -53,13 +73,11 @@
       <div class="form-group">
         <label for="locktype">Lock type:</label>
         <select class="form-control" name="locktype" value="{{$product->locktype}}">
-          <select class="form-control" name="locktype" id="locktype">
             <option value="0" >Nút cài</option>
             <option value="1" >Nút Bấm</option>
             <option value="2" >Khóa kéo</option>
             <option value="3" >Khóa đẩy</option>
             <option value="4" >Khóa khớp</option>
-          </select>
         </select> 
          <label for="number_compartments">Number compartments:</label>
         <input type="text" class="form-control" name="number_compartments" value="{{$product->number_compartments}}">
@@ -70,11 +88,11 @@
       </div>
       <div class="form-group">
         <label for="color">Color:</label>
-        <input type="text" class="form-control"name="color" value="{{$product->color}}">
+        <input type="text" class="form-control" name="color" value="{{$product->color}}">
       </div>
       <div class="form-group">
         <label for="discount" >Discount:</label>
-        <input type="number" class="form-control"name="discount" value="{{$product->discount}}">
+        <input type="number" class="form-control" name="discount" value="{{$product->discount}}">
       </div>
       <div class="form-group">
         <label for="content">Content:</label>

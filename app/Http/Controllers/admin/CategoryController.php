@@ -5,7 +5,7 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Supplier;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 use Session;
 use App\Classes\Helper;
@@ -23,7 +23,7 @@ class CategoryController extends Controller
     public $middleware;
     public function __construct()
     {
-        $this->middleware('CheckAdminLogin');
+        // $this->middleware('CheckAdminLogin');
         $this->viewprefix='admin.category.';
         $this->viewnamespace='admin/category';
     }
@@ -184,12 +184,13 @@ class CategoryController extends Controller
     public function show_category($id)
     {
         $category = DB::table('category')->where('status', '1')->get();
-        $supplier = DB::table('supplier')->where('status', '1')->get();
+        $brand = DB::table('brand')->where('status', '1')->get();
+        $size = DB::table('size')->where('status', '1')->get();
 
         $category_by_id = DB::table('product')->select('product.name', 'product.image', 'product.id', 'product.price')->join('category','product.idcat', '=', 'category.id')->where('product.idcat', $id)->get();
 
         $category_name = DB::table('category')->where('category.id', $id)->limit(1)->get();
 
-        return view('client.home.show_category')->with('category', $category)->with('supplier', $supplier)->with('category_by_id', $category_by_id)->with('category_name', $category_name);
+        return view('client.home.fill.show_category')->with('category', $category)->with('brand', $brand)->with('size', $size)->with('category_by_id', $category_by_id)->with('category_name', $category_name);
     }
 }

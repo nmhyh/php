@@ -27,6 +27,11 @@ Route::get('/shop/supplier/{id}', 'Admin\SupplierController@show_supplier')->nam
 
 Route::get('/shop/product_detail/{id}', 'Admin\ProductController@product_detail')->name('get-client-shop-product_detail');
 
+Route::get('/shop/brand/{id}', 'Admin\BrandController@show_brand')->name('get-client-shop-brand');
+
+Route::get('/shop/size/{id}', 'Admin\SizeController@show_size')->name('get-client-shop-size');
+
+Route::post('/shop/savecart', 'Client\CartController@save_cart')->name('get-client-savecart');
 
 
 

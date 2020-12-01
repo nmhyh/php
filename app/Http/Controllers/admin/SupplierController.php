@@ -20,7 +20,7 @@ class SupplierController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('CheckAdminLogin');
+        // $this->middleware('CheckAdminLogin');
         $this->viewprefix='admin.supplier.';
         $this->viewnamespace='admin/supplier';
     }
@@ -156,15 +156,5 @@ class SupplierController extends Controller
 
     //Hàm client
     
-    public function show_supplier($id)
-    {
-        $category = DB::table('category')->where('status', '1')->get();
-        $supplier = DB::table('supplier')->where('status', '1')->get();
 
-        $supplier_by_id = DB::table('product')->select('product.name', 'product.image', 'product.id', 'product.price')->join('supplier','product.idsup', '=', 'supplier.id')->where('product.idsup', $id)->get();
-
-        $supplier_name = DB::table('supplier')->where('supplier.id', $id)->limit(1)->get();
-
-        return view('client.home.show_supplier')->with('category', $category)->with('supplier', $supplier)->with('supplier_by_id', $supplier_by_id)->with('supplier_name', $supplier_name);
-    }
 }
