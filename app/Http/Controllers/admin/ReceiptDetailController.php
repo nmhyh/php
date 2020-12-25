@@ -4,83 +4,114 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ReceiptDetail;
+use App\Models\Receipt;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Session;
 
 class ReceiptDetailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->viewprefix='admin.receiptdetail.';
+        $this->viewnamespace='admin/receiptdetail';
+    }
+
     public function index()
     {
-        //
+        $receiptDetails = ReceiptDetail::paginate(5);
+        return view($this->viewprefix.'index', compact('receiptDetails'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $receipt = Receipt::all();
+        $products = Product::all();
+        return view($this->viewprefix.'add',compact('receipt', 'products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $receiptDetail = new ReceiptDetail();
+        $this->validate($request, [
+            'quantity' => 'required',
+            'price' => 'required',
+            'id_receipt' => 'required',
+            'id_product' => 'required',
+        ]);
+        $receiptDetail->quantity = $request->quantity;
+        $receiptDetail->price = $request->price;
+        $receiptDetail->id_receipt = $request->id_receipt;
+        $receiptDetail->id_product = $request->id_product;
+
+        if($receiptDetail->save())
+            Session::flash('message', 'successfully!');
+            else
+            Session::flash('message', 'Failure!');
+
+        return redirect()->route('admin-receiptdetail-index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\ReceiptDetail  $receiptDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function show(ReceiptDetail $receiptDetail)
+    public function getedit($id)
     {
-        //
+        $receiptDetail = ReceiptDetail::findOrFail($id);
+        $receipt = Receipt::all();
+        $products = Product::all();
+        return view($this->viewprefix.'edit',compact('receiptDetail', 'receipt', 'products'));    
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\ReceiptDetail  $receiptDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(ReceiptDetail $receiptDetail)
+    public function postedit($id, request $request)
     {
-        //
+        $receiptDetail = ReceiptDetail::findOrFail($id);
+        $this->validate($request, [
+            'quantity' => 'required',
+            'price' => 'required',
+            'id_receipt' => 'required',
+            'id_product' => 'required',
+        ]);
+        $receiptDetail->quantity = $request->quantity;
+        $receiptDetail->price = $request->price;
+        $receiptDetail->id_receipt = $request->id_receipt;
+        $receiptDetail->id_product = $request->id_product;
+        
+        if($receiptDetail->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        
+        return redirect()->route('admin-receiptdetail-index');  
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\ReceiptDetail  $receiptDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, ReceiptDetail $receiptDetail)
+    public function destroy($id)
     {
-        //
+        $receiptDetail = ReceiptDetail::findOrFail($id);   
+        if($receiptDetail->delete())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-receiptdetail-index');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\ReceiptDetail  $receiptDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(ReceiptDetail $receiptDetail)
+    public function active($id)
     {
-        //
+        $receiptDetail = ReceiptDetail::findOrFail($id);
+        $receiptDetail->status = 1;   
+        if($receiptDetail->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-receiptdetail-index');        
+    }
+    
+    public function unactive($id)
+    {
+        $receiptDetail = ReceiptDetail::findOrFail($id); 
+        $receiptDetail->status = 0;    
+        if($receiptDetail->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-receiptdetail-index');       
     }
 }

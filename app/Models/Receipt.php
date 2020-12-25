@@ -10,6 +10,7 @@ class Receipt extends Model
     use HasFactory;
     protected $fillable = [
         'name',
+        'total',
         'idsup',
         'iduser',
         'status',

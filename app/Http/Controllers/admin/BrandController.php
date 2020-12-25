@@ -13,80 +13,89 @@ use DB;
 
 class BrandController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->viewprefix='admin.brand.';
+        $this->viewnamespace='admin/brand';
+    }
+    
     public function index()
     {
-        //
+        $brands = Brand::paginate(5);
+        return view($this->viewprefix.'index')->with('brands', $brands);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view($this->viewprefix.'add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $brand = new Brand();
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $brand->name = $request->name;
+        if($brand->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-brand-index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Brand $brand)
+
+    public function getedit($id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+        return view($this->viewprefix.'edit')->with('brand', $brand);   
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Brand $brand)
+    public function postedit($id,request $request)
     {
-        //
+        $brand = Brand::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $brand->name = $request->name;       
+        
+        if($brand->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        
+        return redirect()->route('admin-brand-index');  
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Brand $brand)
+    public function destroy($id)
     {
-        //
+        $brand = Brand::findOrFail($id);   
+        if($brand->delete())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-brand-index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Brand  $brand
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Brand $brand)
+    public function active($id)
     {
-        //
+        $brand = Brand::findOrFail($id);
+        $brand->status = 1;   
+        if($brand->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-brand-index');        
+    }
+    public function unactive($id)
+    {
+        $brand = Brand::findOrFail($id); 
+        $brand->status = 0;    
+        if($brand->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-brand-index');       
     }
     
     //Hàm client

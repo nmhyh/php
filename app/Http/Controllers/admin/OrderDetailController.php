@@ -4,83 +4,106 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\OrderDetail;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Session;
+use App\Classes\Helper;
+use DB;
 
 class OrderDetailController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->viewprefix='admin.orderdetail.';
+        $this->viewnamespace='admin/orderdetail';
+    }
+    
     public function index()
     {
-        //
+        $orderDetails = OrderDetail::paginate(5);
+        return view($this->viewprefix.'index')->with('orderDetails', $orderDetails);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        $order = Order::all();
+        $products = Product::all();
+        return view($this->viewprefix.'add', compact('order', 'products'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $orderDetail = new OrderDetail();
+        $this->validate($request, [
+            'quantity' => 'required',
+        ]);
+        $orderDetail->quantity = $request->quantity;
+        $orderDetail->id_order = $request->id_order;
+        $orderDetail->id_product = $request->id_product;
+        
+        if($orderDetail->save())
+        Session::flash('message', 'successfully!');
+        else
+        Session::flash('message', 'Failure!');
+        return redirect()->route('admin-orderdetail-index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function show(OrderDetail $orderDetail)
+    public function getedit($id)
     {
-        //
+        $order = Order::all();
+        $products = Product::all();
+        $orderDetail = OrderDetail::findOrFail($id);
+        return view($this->viewprefix.'edit')->with('order', $order)->with('products', $products)->with('orderDetail', $orderDetail);      
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(OrderDetail $orderDetail)
+    public function postedit($id,request $request)
     {
-        //
+        $orderDetail = OrderDetail::findOrFail($id);
+        $this->validate($request, [
+            'quantity' => 'required',
+        ]);
+        $orderDetail->quantity = $request->quantity;
+        $orderDetail->id_order = $request->id_order;
+        $orderDetail->id_product = $request->id_product;
+        
+        if($orderDetail->save())
+        Session::flash('message', 'successfully!');
+        else
+        Session::flash('message', 'Failure!');
+        return redirect()->route('admin-orderdetail-index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, OrderDetail $orderDetail)
+    public function destroy($id)
     {
-        //
+        $orderDetail = OrderDetail::findOrFail($id);   
+        if($orderDetail->delete())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-orderdetail-index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\OrderDetail  $orderDetail
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(OrderDetail $orderDetail)
+    
+    public function active($id)
     {
-        //
+        $orderDetail = OrderDetail::findOrFail($id);
+        $orderDetail->status = 1;   
+        if($orderDetail->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-orderdetail-index');        
+    }
+    
+    public function unactive($id)
+    {
+        $orderDetail = OrderDetail::findOrFail($id); 
+        $orderDetail->status = 0;    
+        if($orderDetail->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-orderdetail-index');       
     }
 }

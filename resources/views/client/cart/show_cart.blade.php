@@ -19,116 +19,127 @@
     <div class="container">
       <div class="cart_inner">
         <div class="table-responsive">
+          @if(Session::has('message'))
+          <div class="alert alert-success">
+            {{ Session::get('message') }}
+          </div>
+          @endif
           <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="img/arrivel/arrivel_1.png" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
+            <form action="{{route('post-client-update_cart')}}" method="POST">  
+              @csrf            
+              <thead>
+                <tr>
+                  <th scope="col">Sản phẩm</th>
+                  <th scope="col">Đơn giá</th>
+                  <th scope="col">Số lượng</th>
+                  <th scope="col" style="width: 12%;">Thành tiền</th>
+                </tr>
+              </thead>
+              <tbody>
+                
+                @php
+                  $total = 0;
+                @endphp
+                
+                @if(Session::get('cart'))                
+                  @foreach (Session::get('cart') as $key => $cart)
+                    @php
+                      $subtotal = $cart['price'] * $cart['qty'];
+                      $total += $subtotal;
+                    @endphp
 
-              <tr class="bottom_button">
+                    <tr>
+                      <td>
+                        <div class="media">
+                          <div class="d-flex">
+                            <img src="{{asset('uploads/product/'. $cart['image'])}}" alt="" style="width: 100px;" />
+                          </div>
+                          <div class="media-body">
+                            <p>{{$cart['name']}}</p>
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <h5>{{number_format($cart['price'], 0,'.','.').' VND'}}</h5>
+                      </td>
+                      <td>
+                        <div class="product_count" style="display: flex;">
+                          {{-- <span class="input-number-decrement"> <i class="ti-minus"></i></span> --}}
+                          
+                            <input class="input-number" type="number" value="{{$cart['qty']}}" name="cart_qty[{{$cart['session_id']}}]" min="1" max="10" style=" width: 42px; text-align: center; padding-left: 0px; height:35px;">
+                            {{-- <span class="input-number-increment"> <i class="ti-plus"></i></span> --}}
+                            
+                        </div>
+                      </td>
+                      <td>
+                        <h5>{{number_format($subtotal, 0,'.','.').' VND'}}</h5>
+                      </td>
+                      <td>
+                        <a class="cart_qty_delete" href="{{route('get-client-delete_product',  $cart['session_id'])}}"><i class="fa fa-times"></i></a>
+                      </td>
+                    </tr>   
+                  @endforeach
+                
+                <tr class="bottom_button">
+                  <td>
+                    <input type="submit" value="Cập nhật" name="update_qty" class="btn_1">
+                  </td>
+              </form>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <div class="cupon_text float-right">
+                      <a class="btn_1 checkout_btn_1" href="{{route('get-client-delete_all_product')}}">Xóa tất cả</a>
+                    </div>
+                  </td>
+                  <td></td>
+                </tr>
+              
+              @else
+              <tr>
                 <td>
-                  <a class="btn_1" href="#">Update Cart</a>
+                  <center>
+                    <?php
+                      echo "Vui lòng thêm sản phẩm vào giỏ hàng";
+                    ?>
+                  </center>
                 </td>
                 <td></td>
                 <td></td>
-                <td>
-                  <div class="cupon_text float-right">
-                    <a class="btn_1" href="#">Close Coupon</a>
-                  </div>
-                </td>
+                <td></td>
+                <td></td>
               </tr>
+              @endif
               <tr>
                 <td></td>
                 <td></td>
                 <td>
-                  <h5>Subtotal</h5>
+                  <h5>Tổng tiền</h5>
                 </td>
                 <td>
-                  <h5>$2160.00</h5>
+                  <h5>{{number_format($total, 0,'.','.').' VND'}}</h5>
                 </td>
+                <td></td>
               </tr>
+              
               <tr class="shipping_area">
                 <td></td>
                 <td></td>
                 <td>
-                  <h5>Shipping</h5>
+                  <h5>Phí vận chuyển</h5>
                 </td>
                 <td>
-                  <div class="shipping_box">
-                    <ul class="list">
-                      <li>
-                        Flat Rate: $5.00
-                        <input type="radio" aria-label="Radio button for following text input">
-                      </li>
-                      <li>
-                        Free Shipping
-                        <input type="radio" aria-label="Radio button for following text input">
-                      </li>
-                      <li>
-                        Flat Rate: $10.00
-                        <input type="radio" aria-label="Radio button for following text input">
-                      </li>
-                      <li class="active">
-                        Local Delivery: $2.00
-                        <input type="radio" aria-label="Radio button for following text input">
-                      </li>
-                    </ul>
-                    <h6>
-                      Calculate Shipping
-                      <i class="fa fa-caret-down" aria-hidden="true"></i>
-                    </h6>
-                    <select class="shipping_select">
-                      <option value="1">Bangladesh</option>
-                      <option value="2">India</option>
-                      <option value="4">Pakistan</option>
-                    </select>
-                    <select class="shipping_select section_bg">
-                      <option value="1">Select a State</option>
-                      <option value="2">Select a State</option>
-                      <option value="4">Select a State</option>
-                    </select>
-                    <input class="post_code" type="text" placeholder="Postcode/Zipcode" />
-                    <a class="btn_1" href="#">Update Details</a>
-                  </div>
+                  <h5>
+                    Miễn phí
+                  </h5>
                 </td>
+                <td></td>
               </tr>
             </tbody>
           </table>
           <div class="checkout_btn_inner float-right">
-            <a class="btn_1" href="#">Continue Shopping</a>
-            <a class="btn_1 checkout_btn_1" href="#">Proceed to checkout</a>
-          </div>
+            <a class="btn_1" href="#">Tiếp tục mua hàng</a>
+            <a class="btn_1 checkout_btn_1" href="{{route('get-client-login')}}">Thanh toán</a>
         </div>
       </div>
   </section>

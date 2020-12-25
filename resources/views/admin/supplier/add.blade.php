@@ -9,7 +9,7 @@
       <form action="{{route('admin-supplier-store')}}" method="POST" enctype="multipart/form-data">
          {{ csrf_field() }}
          <div class="form-group">
-            <label for="name">Name:</label>
+            <label for="name">Tên:</label>
             <input type="text" class="form-control" name="name" required>
          </div>
          <div class="form-group">
@@ -17,7 +17,7 @@
             <input type="text" class="form-control" name="email" required>
          </div>
          <div class="form-group">
-            <label for="phone">Phone:</label>
+            <label for="phone">Điện thoại:</label>
             <input type="number" class="form-control" name="phone" required>
          </div>
          <button type="submit" name="btn_add"class="btn btn-primary" style="float: left;">Thực Hiện</button>

@@ -26,8 +26,12 @@
             </select>
       </div>
       <div class="form-group">
-        <label for="name">Name:</label>
+        <label for="name">Tên:</label>
         <input type="text" class="form-control" name="name" value="{{$receipt->name}}" required>
+      </div>
+      <div class="form-group">
+        <label for="total">Tổng tiền:</label>
+        <input type="number" class="form-control" name="total" value="{{$receipt->total}}" required>
       </div>
       <button type="submit" name="btn_editreceiptgory"class="btn btn-primary" style="float: left;">Thực Hiện</button>
       <div>

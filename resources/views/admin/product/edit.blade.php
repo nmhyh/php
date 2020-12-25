@@ -8,7 +8,7 @@
     <form action="{{route('admin-product-postedit', $product->id)}}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="form-group">
-          <label for="idcat">Category:</label>
+          <label for="idcat">Loại sản phẩn:</label>
              <select name="idcat" class="form-control">
                  @foreach ($category as $cate)
                  <option value="{{$cate->id}}">{{$cate->name}}</option>                     
@@ -16,7 +16,7 @@
              </select>
         </div>
         <div class="form-group">
-          <label for="idbra">Brand:</label>
+          <label for="idbra">Thương Hiệu:</label>
              <select name="idbra" class="form-control">
                  @foreach ($brand as $bra)
                  <option value="{{$bra->id}}">{{$bra->name}}</option>                     
@@ -24,7 +24,7 @@
              </select>
         </div>
         <div class="form-group">
-          <label for="idsize">Size:</label>
+          <label for="idsize">Kích cỡ:</label>
              <select name="idsize" class="form-control">
                  @foreach ($size as $s)
                  <option value="{{$s->id}}">{{$s->name}}</option>                     
@@ -32,70 +32,72 @@
              </select>
         </div>
       <div class="form-group">
-        <label for="idbra">Brand:</label>
-        <input type="text" class="form-control" name="idbra" value="{{$product->idbra}}">
-      </div>
-      <div class="form-group">
-        <label for="idsize">Size:</label>
-        <input type="text" class="form-control" name="idsize" value="{{$product->idsize}}">
-      </div>
-      <div class="form-group">
-        <label for="name">Name:</label>
+        <label for="name">Tên:</label>
         <input type="text" class="form-control" name="name" value="{{$product->name}}" required>
       </div>
       <div class="form-group">
-        <label for="image">Image 1:</label>
+        <label for="image">Hình ảnh 1:</label>
         <input type="file" class="form-control" name="image" value="{{$product->image}}">
         <img src="{{asset('uploads/product/'. $product->image)}}" width="140px" />
       </div>
       <div class="form-group">
-        <label for="image2">Image 2:</label>
+        <label for="image2">Hình ảnh 2:</label>
         <input type="file" class="form-control" name="image2" value="{{$product->image2}}">
         <img src="{{asset('uploads/product/'. $product->image2)}}" width="140px" />
       </div>
       <div class="form-group">
-        <label for="image3">Image 3:</label>
+        <label for="image3">Hình ảnh 3:</label>
         <input type="file" class="form-control" name="image3" value="{{$product->image3}}">
         <img src="{{asset('uploads/product/'. $product->image3)}}" width="140px" />
       </div>
       <div class="form-group">
-        <label for="price">Price:</label>
+        <label for="price">Giá:</label>
         <input type="number" class="form-control"name="price" value="{{$product->price}}">
       </div>
       <div class="form-group">
-        <label for="material">Material:</label>
+        <label for="material">Chất liệu:</label>
         <input type="text" class="form-control" name="material" value="{{$product->material}}">
       </div>
       <div class="form-group">
-        <label for="strap_material">Strap material:</label>
+        <label for="strap_material">Chất liệu dây đeo:</label>
         <input type="text" class="form-control" name="strap_material" value="{{$product->strap_material}}">
       </div>
       <div class="form-group">
-        <label for="locktype">Lock type:</label>
+        <label for="patterns">Hoa văn:</label>
+        <input type="text" class="form-control" name="patterns" value="{{$product->patterns}}">
+      </div>
+      <div class="form-group">
+        <label for="locktype">Kiểu khóa:</label>
         <select class="form-control" name="locktype" value="{{$product->locktype}}">
-            <option value="0" >Nút cài</option>
-            <option value="1" >Nút Bấm</option>
-            <option value="2" >Khóa kéo</option>
-            <option value="3" >Khóa đẩy</option>
-            <option value="4" >Khóa khớp</option>
-        </select> 
-         <label for="number_compartments">Number compartments:</label>
+          <option value="0" >Nút Cài</option>
+          <option value="1" >Nút Bấm</option>
+          <option value="2" >Khóa Kéo</option>
+          <option value="3" >Khóa Đẩy</option>
+          <option value="4" >Khóa Khớp</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="quantity">Số lượng:</label>
+        <input type="text" class="form-control" name="quantity" value="{{$product->quantity}}">
+      </div>
+      <div class="form-group">
+        <label for="number_compartments">Số ngăn:</label>
         <input type="text" class="form-control" name="number_compartments" value="{{$product->number_compartments}}">
       </div>
       <div class="form-group">
-        <label for="dimensions">Dimensions:</label>
+        <label for="dimensions">Kích thước:</label>
         <input type="text" class="form-control" name="dimensions" value="{{$product->dimensions}}">
       </div>
       <div class="form-group">
-        <label for="color">Color:</label>
+        <label for="color">Màu:</label>
         <input type="text" class="form-control" name="color" value="{{$product->color}}">
       </div>
       <div class="form-group">
-        <label for="discount" >Discount:</label>
+        <label for="discount">Giảm giá:</label>
         <input type="number" class="form-control" name="discount" value="{{$product->discount}}">
       </div>
       <div class="form-group">
-        <label for="content">Content:</label>
+        <label for="content">Nội dung:</label>
         <textarea class="form-control" name="content" id="contents">{{$product->content}}</textarea>
       </div>
       <button type="submit" name="btn_editproductgory"class="btn btn-primary" style="float: left;">Thực Hiện</button>

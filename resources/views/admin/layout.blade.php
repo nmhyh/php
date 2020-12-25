@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-<title>Visitors an Admin Panel Category Bootstrap Responsive Website Template | Home :: w3layouts</title>
+<title>Winter</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -34,7 +34,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!--logo start-->
 <div class="brand">
     <a href="index.html" class="logo">
-        VISITORS
+        WINTER
     </a>
     <div class="sidebar-toggle-box">
         <div class="fa fa-bars"></div>
@@ -228,14 +228,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <img alt="" src="{{asset('admin_asset/images/2.png')}}">
-                <span class="username">John Doe</span>
+                <img alt="" src="{{asset('uploads/user/'. Auth::User()->image)}}">
+                <span class="username">{{Auth::User()->name}}</span>
                 <b class="caret"></b>
             </a>
             <ul class="dropdown-menu extended logout">
-                <li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>
-                <li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>
-                <li><a href="{{route('get-admin-Logout')}}"><i class="fa fa-key"></i> Log Out</a></li>
+                <!--<li><a href="#"><i class=" fa fa-suitcase"></i>Profile</a></li>-->
+                <!--<li><a href="#"><i class="fa fa-cog"></i> Settings</a></li>-->
+                <li><a href="{{route('get-admin-Logout')}}"><i class="fa fa-key"></i>Đăng xuất</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -252,7 +252,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a class="active" href="index.html">
+                    <a class="active" href="{{route("overview")}}">
                         <i class="fa fa-dashboard"></i>
                         <span>Tổng quan</span>
                     </a>
@@ -261,29 +261,45 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-book"></i>
+                        <span>Tài khoản</span>
+                    </a>                    
+                    <ul class="sub">
+                        <li><a href="{{route("admin-user-index")}}">Tất cả tài khoản</a></li>
+                        <li><a href="{{route("admin-user-myaccount", Auth::user()->id)}}">Tài khoản của tôi</a></li>                        
+                    </ul>
+                </li>
+                <li>
+                    <a href="{{route("admin-customer-index")}}">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Khách hàng</span>
+                    </a>
+                </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-th"></i>
                         <span>Sản phẩm</span>
                     </a>
                     <ul class="sub">
 						<li><a href="{{route('admin-product-index')}}">Danh sách sản phẩm</a></li>
                         <li><a href="{{route('admin-category-index')}}">Danh sách loại sản phẩm</a></li>
-                        <li><a href="grids.html">Grids</a></li>
-                    </ul>
-                </li>
-                <li class="sub-menu">
-                    <a href="javascript:;">
-                        <i class="fa fa-th"></i>
-                        <span>Tài khoản</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a href="{{route("admin-user-myaccount", Auth::user()->id)}}">Tài khoản của tôi</a></li>
-                        <li><a href="{{route("admin-user-index")}}">Tất cả tài khoản</a></li>
-                        <li><a href="">Phân quyền</a></li>
                     </ul>
                 </li>
                 <li>
                     <a href="{{route("admin-supplier-index")}}">
                         <i class="fa fa-bullhorn"></i>
                         <span>Nhà cung cấp</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route("admin-brand-index")}}">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Thương hiệu</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route("admin-size-index")}}">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Kích cỡ</span>
                     </a>
                 </li>
                 <li class="sub-menu">
@@ -293,18 +309,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     </a>
                     <ul class="sub">
                         <li><a href="{{route("admin-receipt-index")}}">Phiếu nhập</a></li>
-                        <li><a href="form_validation.html">Form Validation</a></li>
-						<li><a href="dropzone.html">Dropzone</a></li>
+                        <li><a href="{{route("admin-receiptdetail-index")}}">Chi tiết phiếu nhập</a></li>
                     </ul>
                 </li>
                 <li class="sub-menu dcjq-parent-li">
                     <a href="javascript:;" class="dcjq-parent">
-                        <i class=" fa fa-bar-chart-o"></i>
-                        <span>Charts</span>
+                        <i class="fa fa-bar-chart-o"></i>
+                        <span>Hóa đơn</span>
                     <span class="dcjq-icon"></span></a>
                     <ul class="sub" style="display: none;">
-                        <li><a href="chartjs.html">Chart js</a></li>
-                        <li><a href="flot_chart.html">Flot Charts</a></li>
+                        <li><a href="{{route("admin-order-index")}}">Danh sách hóa đơn</a></li>
+                        <li><a href="{{route("admin-orderdetail-index")}}">Danh sách chi tiết hóa đơn</a></li>
                     </ul>
                 </li>
 

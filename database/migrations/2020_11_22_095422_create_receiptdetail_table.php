@@ -18,7 +18,8 @@ class CreateReceiptdetailTable extends Migration
             $table->Increments('id')->unsigned();       
             $table->timestamps();
             $table->integer('quantity')->nullable();
-            $table->float('price')->nullable();            
+            $table->float('price')->nullable();  
+            $table->integer('status')->default(1);          
             $table->integer('id_receipt')->unsigned()->nullable();
             $table->foreign('id_receipt')->references('id')->on('receipt');
             $table->integer('id_product')->unsigned()->nullable();

@@ -23,6 +23,9 @@
   a i.fa.fa-unlock-alt {
       color: #fff;
   }
+  .flex{
+        text-align: center;
+    }
 </style>
 <div class="table-agile-info">
   <div class="panel panel-default">
@@ -37,13 +40,12 @@
       <table class="table table-striped b-t b-light">
         <thead>
           <tr>
-            <th>Image</th>
-            <th>Name</th>
-            <th>Created at</th>
-            <th>Content</th>
-            <th>Edit</th>
-            <th>Lock</th>
-            <th>Delete</th>        
+            <th>Hình ảnh</th>
+            <th>Tên</th>
+            <th>Ngày tạo</th>
+            <th>Sửa</th>
+            <th>Tình trạng</th>
+            <th>Xóa</th>        
           </tr>
         </thead>
         <tbody>
@@ -52,7 +54,6 @@
               <td><img src="{{asset('uploads/category/'. $category->image)}}" width="40" /></td>
               <td>{{$category->name}} </td>
               <td>{{$category->created_at}} </td>
-              <td>{{$category->content}} </td>
               <td><a href="{{route('admin-category-getedit',$category->id)}}" class="btn btn-primary"><i class="fa fa-edit"></i></a></td>
               <td>
                 <?php
@@ -67,14 +68,17 @@
                 <?php }
                 ?>
               </td>
-              <td><a href="{{route('admin-category-destroy', $category->id)}}" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+              <td>
+                <a href="{{route('admin-category-destroy', $category->id)}}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
+              </td>
             </tr>
           @endforeach
         </tbody>
       </table>
+      {{$cate->render()}}
     </div>
     <!-- footer -->
-    <footer class="panel-footer">
+    {{-- <footer class="panel-footer">
       <div class="row">
           
           <div class="col-sm-5 text-center">
@@ -91,7 +95,7 @@
           </ul>
           </div>
       </div>
-  </footer>
+  </footer> --}}
   <!-- / footer -->
   </div>
 </div>

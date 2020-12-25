@@ -8,7 +8,7 @@
     <form action="{{route('admin-supplier-postedit', $supplier->id)}}" method="POST">
       {{ csrf_field() }}
       <div class="form-group">
-      <label for="name">Name:</label>
+      <label for="name">Tên:</label>
       <input type="text" class="form-control" name="name" value="{{$supplier->name}}">
       </div>
       <div class="form-group">
@@ -16,7 +16,7 @@
         <input type="text" class="form-control" name="email" value="{{$supplier->email}}">
       </div>
       <div class="form-group">
-        <label for="phone">Phone:</label>
+        <label for="phone">Điện thoại:</label>
         <input type="number" class="form-control" name="phone" value="{{$supplier->phone}}">
       </div>
       <button type="submit" name="btn_edit"class="btn btn-primary"  style="float: left;">Thực Hiện</button>

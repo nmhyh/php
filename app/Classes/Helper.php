@@ -41,8 +41,8 @@ class Helper{
                 $request->validate([
                     'image2' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
-                $imageName = $id .'_2.'.$request->image->extension();
-                $request->image->move(public_path('uploads/' . $bang), $imageName);
+                $imageName = $id .'_2.'.$request->image2->extension();
+                $request->image2->move(public_path('uploads/' . $bang), $imageName);
                 return $imageName;
             }
         }
@@ -55,8 +55,8 @@ class Helper{
                 $request->validate([
                     'image3' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
                 ]);
-                $imageName = $id .'_3.'.$request->image->extension();
-                $request->image->move(public_path('uploads/' . $bang), $imageName);
+                $imageName = $id .'_3.'.$request->image3->extension();
+                $request->image3->move(public_path('uploads/' . $bang), $imageName);
                 return $imageName;
             }
         }

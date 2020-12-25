@@ -29,7 +29,7 @@ class LoginController extends Controller
         ];
         
         if (Auth::attempt($login)) {
-        return view('admin.layout')->with('name', Auth::User()->name);
+            return view('admin.overview.index')->with('name', Auth::User()->name);
         } else {
             return view('admin.login.login')->with('status', 'Email hoặc Password không chính xác');
         }

@@ -1,49 +1,65 @@
 @extends('admin.layout')
 @section('content')   
-{{-- {{Auth::user()->id}} --}}
-<form action="" method="POST">
-{{ csrf_field() }}
-    <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" class="form-control" id="name" name="txtname" value="{{$user->name}}" disabled>
-    </div>
-    <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="text" class="form-control" id="email" name="txtemail" value="{{$user->email}}" disabled>
-    </div>
-    <div class="form-group">
-        <label for="pwd">Password:</label>
-        <input type="password" class="form-control" id="pwd" name="txtpassword" value="{{$user->password}}" disabled>
-    </div>
-    <div class="form-group">
-        <label for="dateofbirth">Date of Birth:</label>
-        <input type="date" class="form-control" id="dateofbirth" name="txtdateofbirth" value="{{$user->dateofbirth}}" disabled>
-      </div>
-      <div class="form-group">
-        <label for="sex" style="float: left;">Sex:</label>
-        <div class="radio" style="margin-left: 40px;" disabled>
-          <label><input type="radio" name="optradio" value="Nam" <?php if($user->sex == 'Nam'){echo "checked";}?> >Nam</label>
-          <label><input type="radio" name="optradio" value="Nữ" <?php if($user->sex == 'Nữ'){echo "checked";}?> >Nữ</label>
-        </div>  
-      </div>
-      <div class="form-group">
-        <label for="image">Image:</label>
-        <input type="file" class="form-control"name="txtimage" value="{{$user->image}}" disabled/>
-      </div>
-      <div class="form-group">
-        <label for="phone">Phone:</label>
-        <input type="number" class="form-control" id="phone" name="txtphone" value="{{$user->phone}}" disabled />
-      </div>
-      <div class="form-group">
-        <label for="position">Position:</label>
-        <select class="form-control" name="txtposition" id="txtposition" disabled>
-            <option value="1" <?php if($user->position == 1){echo "selected";}?> >Quản Lí</option>    
-            <option value="0" <?php if($user->position == 0){echo "selected";}?> >Nhân Viên</option>     
-        </select>
-      </div>
 
-      <div>
-        <a href="{{route("admin-user-index")}}" class="btn btn-warning">Trở Về</a>
-      </div>
-</form>
+<div class="table-agile-info">
+  <div class="panel-heading">Tài khoản của tôi</div>
+
+  <div>
+      <hr />
+      <dl class="row">
+          <dt class = "col-sm-2">
+            Tên:
+          </dt>
+          <dd class = "col-sm-10">
+            {{$user->name}}
+          </dd>
+          <dt class = "col-sm-2">
+            Email:
+          </dt>
+          <dd class = "col-sm-10">
+            {{$user->email}}
+          </dd>
+          <dt class="col-sm-2">
+            Ngày sinh:
+          </dt>
+          <dd class = "col-sm-10">
+            {{$user->dateofbirth}}
+          </dd>
+          <dt class = "col-sm-2">
+            Giới tính:
+          </dt>
+          <dd class = "col-sm-10">
+            <?php if($user->sex == 'Nam'){echo "Nam";}
+            else if($user->sex == 'Nữ'){echo "Nữ";}?>
+          </dd>
+          <dt class = "col-sm-2">
+            Hình ảnh:
+          </dt>
+          <dd class = "col-sm-10">
+            <img src="{{asset('uploads/user/'. $user->image)}}" width="60" />
+          </dd>
+          <dt class = "col-sm-2">
+            Điện thoại:
+          </dt>
+          <dd class = "col-sm-10">
+            {{$user->phone}}
+          </dd>
+          <dt class = "col-sm-2">
+            Vị trí:
+          </dt>
+          <dd class = "col-sm-10">
+            <?php if($user->position == 1){echo "Quản lí";}
+            else if($user->position == 0){echo "Nhân viên";}?>
+          </dd>
+          <dt class = "col-sm-2">
+            Trạng Thái:
+          </dt>
+          <dd class = "col-sm-10">
+            <?php if($user->status == 1){echo "Kích hoạt";}
+            else if($user->status == 0){echo "Chưa kích hoạt";}?>
+          </dd>
+          
+      </dl>
+  </div>
+</div>
 @stop

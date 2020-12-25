@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <head>
-<title>Visitors an Admin Panel Category Bootstrap Responsive Website Template | Login :: w3layouts</title>
+<title>Winner shopping</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="Visitors Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, 
@@ -33,8 +33,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		<form action="{{route('post-admin-Login')}}" method="post">
             {{ csrf_field() }}
             <input type="email" class="ggg" name="txtEmail" placeholder="E-MAIL" required="" value="admin@gmail.com">
-            <input type="password" class="ggg" name="txtPassword" placeholder="PASSWORD" required="" value="123
-            45">
+            <input type="password" class="ggg" name="txtPassword" placeholder="PASSWORD" required="" value="123456">
 			<span><input type="checkbox" />Remember Me</span>
 			<h6><a href="#">Forgot Password?</a></h6>
 				<div class="clearfix"></div>

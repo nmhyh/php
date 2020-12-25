@@ -23,6 +23,9 @@
     a i.fa.fa-unlock-alt {
         color: #fff;
     }
+    .flex{
+        text-align: center;
+    }
 </style>
 <div class="table-agile-info">
   <div class="panel panel-default">
@@ -36,14 +39,14 @@
         <table class="table table-striped b-t b-light">
           <thead>
             <tr>
-              <th>Idcat</th>
-              <th>Image</th>
-              <th>Name</th>
-              <th>Price</th>
-              <th>Discount</th>
-              <th>Edit</th>
-              <th>Lock</th>
-              <th>Delete</th>          
+              <th>Loại sản phẩm</th>
+              <th>Hình ảnh</th>
+              <th>Tên</th>
+              <th>Giá</th>
+              <th>Giảm giá</th>
+              <th>Sửa</th>
+              <th>Tình trạng</th>
+              <th>Xóa</th>          
             </tr>
           </thead>
           <tbody>
@@ -73,26 +76,8 @@
             @endforeach
           </tbody>
         </table>
+        {{$products->render()}}
     </div>
-    <!-- footer -->
-    <footer class="panel-footer">
-      <div class="row">          
-          <div class="col-sm-5 text-center">
-          <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-          </div>
-          <div class="col-sm-7 text-right text-center-xs">                
-          <ul class="pagination pagination-sm m-t-none m-b-none">
-              <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-              <li><a href="">1</a></li>
-              <li><a href="">2</a></li>
-              <li><a href="">3</a></li>
-              <li><a href="">4</a></li>
-              <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
-          </ul>
-          </div>
-      </div>
-    </footer>
-  <!-- / footer -->
   </div>
 </div>
 @if(Session::has('message'))

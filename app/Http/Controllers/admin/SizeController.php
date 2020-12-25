@@ -13,80 +13,90 @@ use DB;
 
 class SizeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function __construct()
+    {
+        $this->viewprefix='admin.size.';
+        $this->viewnamespace='admin/size';
+    }
+
     public function index()
     {
-        //
+        $sizes = Size::paginate(5);
+        return view($this->viewprefix.'index')->with('sizes', $sizes);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view($this->viewprefix.'add');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $size = new Size();
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $size->name = $request->name;
+        if($size->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-size-index');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Size  $size
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Size $size)
+    public function getedit($id)
     {
-        //
+        $size = Size::findOrFail($id);
+        return view($this->viewprefix.'edit')->with('size', $size);   
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Size  $size
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Size $size)
+    public function postedit($id,request $request)
     {
-        //
+        $size = Size::findOrFail($id);
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+        $size->name = $request->name;       
+        
+        if($size->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        
+        return redirect()->route('admin-size-index');  
+    }
+   
+    public function destroy($id)
+    {
+        $size = Size::findOrFail($id);   
+        if($size->delete())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-size-index');
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Size  $size
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Size $size)
+    public function active($id)
     {
-        //
+        $size = Size::findOrFail($id);
+        $size->status = 1;   
+        if($size->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-size-index');        
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Size  $size
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Size $size)
+    
+    public function unactive($id)
     {
-        //
+        $size = Size::findOrFail($id); 
+        $size->status = 0;    
+        if($size->save())
+            Session::flash('message', 'successfully!');
+        else
+            Session::flash('message', 'Failure!');
+        return redirect()->route('admin-size-index');       
     }
 
     //Hàm client

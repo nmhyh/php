@@ -36,7 +36,7 @@ class CreateProductTable extends Migration
             $table->string('image3')->nullable();
             $table->float('price')->nullable();
             $table->string('material')->nullable();             // Chất liệu
-            $table->string('strap_material')->nullable();       // Chất liệu dây đep
+            $table->string('strap_material')->nullable();       // Chất liệu dây đeo
             $table->string('patterns')->nullable();             // Hoa văn
             $table->integer('locktype')->nullable();            // Kiểu khóa
             $table->integer('quantity')->nullable();            // Số lượng

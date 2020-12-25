@@ -35,13 +35,18 @@
         </div>
         <div class="col-lg-5 offset-lg-1">
           <div class="s_product_text">
-            <form action="{{route('get-client-savecart')}}" method="POST">
+            <form>
                 {{ csrf_field() }}
+                <input type="hidden" value="{{$product->id}}" class="cart_product_id_{{$product->id}}">
+                <input type="hidden" value="{{$product->name}}" class="cart_product_name_{{$product->id}}">
+                <input type="hidden" value="{{$product->image}}" class="cart_product_image_{{$product->id}}">
+                <input type="hidden" value="{{$product->price}}" class="cart_product_price_{{$product->id}}">
+                {{-- <input type="hidden" value="1" class="cart_product_qty_{{$product->id}}"> --}}
                 <h3>{{$product->name}}</h3>
                 <h2>{{number_format($product->price). " VND"}}</h2>
                 <ul class="list">
                   <li>
-                    <a href="#">
+                    {{-- <a href="#"> --}}
                       <span>Mã sản phẩm</span> : {{$product->id}}</a>
                   </li>
                   {{-- <li>
@@ -49,31 +54,32 @@
                       <span>Mã sản phẩm</span> : {{$product->id}}</a>
                   </li> --}}
                   <li>
-                    <a href="#"> <span>Tình trạng</span> : Còn hàng</a>
+                    {{-- <a href="#"> --}}
+                      <span>Tình trạng</span> : Còn hàng</a>
                   </li>
                   <li>
-                    <a href="#">
+                    {{-- <a href="#"> --}}
                       <span>Chất liệu</span> : {{$product->material}}</a>
                   </li>
                   <li>
-                    <a href="#">
+                    {{-- <a href="#"> --}}
                       <span>Chất liệu dây đeo</span> : {{$product->strap_material}}</a>
                   </li>
 
                   <li>
-                    <a href="#">
+                    {{-- <a href="#"> --}}
                       <span>Kích thước</span> : {{$product->dimensions}}</a>
                   </li>
                   <li>
-                    <a href="#">
+                    {{-- <a href="#"> --}}
                       <span>Kích cỡ</span> : <?php if($product->idsize == 1){echo "S";} else if($product->idsize == 2){echo "M";} else if($product->idsize == 3){echo "L";}?></a>
                   </li>
                   <li>
-                    <a href="#">
+                    {{-- <a href="#"> --}}
                       <span>Kiểu khóa</span> : <?php if($product->locktype == 0){echo "Nút Cài";} else if($product->locktype == 1){echo"Nút Bấm";} else if($product->locktype == 2){echo"Khóa Kéo";}else if($product->locktype == 3){echo"Khóa Đẩy";} else if($product->locktype == 4){echo"Khóa Khớp";}?> </a>
                   </li>
                   <li>
-                    <a href="#">
+                    {{-- <a href="#"> --}}
                       <span>Số ngăn</span> : {{$product->number_compartments}}</a>
                   </li>
 
@@ -83,15 +89,17 @@
                 </p>
                 <div class="card_area">
                   <div class="product_count d-inline-block">
-                    <span class="inumber-decrement"> <i class="ti-minus"></i></span>
-                    <input class="input-number" type="text" value="1" min="1" name="qty">
+                    {{-- <span class="inumber-decrement"> <i class="ti-minus"></i></span> --}}
+                    {{-- <input class="input-number" type="text" value="1" min="1" name="qty"> --}}
+                    <input type="number" value="1" min="1" max="10" class="cart_product_qty_{{$product->id}}">
                     <input class="input-number" type="text" value="{{$product->id}}"name="product_id" hidden>
-                    <span class="number-increment"> <i class="ti-plus"></i></span>
+                    
+                    {{-- <span class="number-increment"> <i class="ti-plus"></i></span> --}}
                   </div>
                   <div class="add_to_cart">
                       {{-- <a href="#" class="btn_3">Thêm vào giỏ hàng</a>
                       <a href="#" class="like_us"> <i class="ti-heart"></i> </a> --}}
-                      <button type="submit" class="btn btn-primary">THÊM VÀO GIỎ HÀNG</button>
+                      <button type="button" name="add-to-cart" class="btn btn-primary add-to-cart" data-id_product="{{$product->id}}">THÊM VÀO GIỎ HÀNG</button>
                   </div>
                 
                   <div class="social_icon">

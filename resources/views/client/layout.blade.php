@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="{{asset('client_asset/css/slick.css')}}">
     <!-- style CSS -->
     <link rel="stylesheet" href="{{asset('client_asset/css/style.css')}}">
+    <!-- sweetalert CSS -->
+    <link rel="stylesheet" href="{{asset('client_asset/css/sweetalert.css')}}">
 </head>
 
 <body>
@@ -90,10 +92,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="hearer_icon d-flex">
-                            <div class="dropdown cart">
-                                <a class="dropdown-toggle" href="#" id="navbarDropdown3" role="button"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <div class="">
+                            {{-- <div class="dropdown cart"> --}}
+                                <a class="login" href="{{route('get-client-login')}}">
+                                    <i class="ti-heart"></i>
+                                </a>
+
+                                <a class="showcart" href="{{route('get-client-showcart')}}">
                                     <i class="ti-bag"></i>
                                 </a>
                                 <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -101,8 +106,10 @@
     
                                     </div>
                                 </div> -->
-                            </div>
-                            <a id="search_1" href="javascript:void(0)"><i class="ti-search"></i></a>
+                            {{-- </div> --}}
+                                <a id="search_1" href="javascript:void(0)">
+                                    <i class="ti-search"></i>
+                                </a>
                         </div>
                     </nav>
                 </div>
@@ -110,9 +117,10 @@
         </div>
         <div class="search_input" id="search_input_box">
             <div class="container ">
-                <form class="d-flex justify-content-between search-inner">
-                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                    <button type="submit" class="btn"></button>
+                <form action="{{route('post-client-search')}}" class="d-flex justify-content-between search-inner" method="POST">
+                    {{ csrf_field() }}
+                    <input type="text" class="form-control" id="search_input" name="keywords_submit" placeholder="Tìm kiếm sản phẩm">
+                    <button type="submit" name="search_items" class="btn"></button>
                     <span class="ti-close" id="close_search" title="Close Search"></span>
                 </form>
             </div>
@@ -163,26 +171,12 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="instagram_photo_iner">
+                        @foreach($product_5 as $pro_5) 
                         <div class="single_instgram_photo">
-                            <img src="{{asset('client_asset/img/instagram/inst_1.png')}}" alt="">
-                            <a href="#"><i class="ti-instagram"></i></a> 
+                            <img src="{{asset('uploads/product/'. $pro_5->image)}}" alt="">
+                            <a href="{{route("get-client-shop-product_detail", $pro_5->id)}}"><i class="ti-instagram"></i></a> 
                         </div>
-                        <div class="single_instgram_photo">
-                            <img src="{{asset('client_asset/img/instagram/inst_2.png')}}" alt="">
-                            <a href="#"><i class="ti-instagram"></i></a> 
-                        </div>
-                        <div class="single_instgram_photo">
-                            <img src="{{asset('client_asset/img/instagram/inst_3.png')}}" alt="">
-                            <a href="#"><i class="ti-instagram"></i></a> 
-                        </div>
-                        <div class="single_instgram_photo">
-                            <img src="{{asset('client_asset/img/instagram/inst_4.png')}}" alt="">
-                            <a href="#"><i class="ti-instagram"></i></a> 
-                        </div>
-                        <div class="single_instgram_photo">
-                            <img src="{{asset('client_asset/img/instagram/inst_5.png')}}" alt="">
-                            <a href="#"><i class="ti-instagram"></i></a> 
-                        </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -288,6 +282,44 @@
     <script src="{!! asset('client_asset/js/mail-script.js') !!}"></script>
     <!-- custom js -->
     <script src="{!! asset('client_asset/js/custom.js') !!}"></script>
+    <script src="{!! asset('client_asset/js/sweetalert.js') !!}"></script>
+    
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.add-to-cart').click(function(){
+                var id = $(this).data('id_product');
+                var cart_product_id = $('.cart_product_id_' + id).val(); 
+                var cart_product_name = $('.cart_product_name_' + id).val();
+                var cart_product_image = $('.cart_product_image_' + id).val();
+                var cart_product_price = $('.cart_product_price_' + id).val();
+                var cart_product_qty = $('.cart_product_qty_' + id).val();
+                var _token = $('input[name="_token"]').val();
+                $.ajax({
+                    url: '{{url('/shop/add-cart-ajax')}}',
+                    method: 'POST',
+                    data:{cart_product_id:cart_product_id, cart_product_name:cart_product_name, cart_product_image:cart_product_image, cart_product_price:cart_product_price, cart_product_qty:cart_product_qty, _token:_token},
+                    success:function(data){
+                    swal({
+                            title: "Đã thêm sản phẩm vào giỏ hàng",
+                            text: "Bạn có thể mua hàng tiếp hoặc tới giỏ hàng để tiến hành thanh toán",
+                            showCancelButton: true,
+                            cancelButtonText: "Xem tiếp",
+                            confirmButtonClass: "btn-success",
+                            confirmButtonText: "Đi đến giỏ hàng",
+                            closeOnConfirm: false
+                        },
+                        function() {
+                            window.location.href = "{{route('get-client-showcart')}}";
+                        });
+
+                    }
+
+                });
+            });
+        
+        });
+    </script>
+
 </body>
 
 </html>

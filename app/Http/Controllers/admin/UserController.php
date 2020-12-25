@@ -12,23 +12,24 @@ use App\Classes\Helper;
 
 class UserController extends Controller
 {
-    public $viewprefix;
-    public $viewnamespace;
+
     public function __construct()
     {   
-        //$this->middleware('CheckAdminLogin');
         $this->viewprefix='admin.user.';
         $this->viewnamespace='admin/user';
     }
+
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(5);
         return view($this->viewprefix.'index', compact('users'));
     }
+
     public function getadd()
     {
         return view('admin.user.add'); 
     }
+
     public function postadd(request $request)
     {
         $user = new User();
@@ -55,16 +56,19 @@ class UserController extends Controller
             Session::flash('message', 'Failure!');
         return redirect('admin/user');
     }
+
     public function getedit($id)
     {
         $user = User::findOrFail($id);
         return view($this->viewprefix.'edit',compact('user'));      
     }
+
     public function myaccount($id)
     {
         $user = User::findOrFail($id);
         return view($this->viewprefix.'myaccount',compact('user'));      
     }
+
     public function postedit($id,request $request)
     {
         $user = User::findOrFail($id);
@@ -89,6 +93,7 @@ class UserController extends Controller
             Session::flash('message', 'Failure!');
         return redirect('admin/user');   
     }
+
     public function delete($id)
     {
         $user = User::findOrFail($id);   
@@ -98,6 +103,7 @@ class UserController extends Controller
             Session::flash('message', 'Failure!');
         return redirect('admin/user');       
     }
+
     public function active($id)
     {
         $user = User::findOrFail($id);
@@ -107,7 +113,9 @@ class UserController extends Controller
         else
             Session::flash('message', 'Failure!');
         return redirect('admin/user');       
-    }public function unactive($id)
+    }
+    
+    public function unactive($id)
     {
         $user = User::findOrFail($id); 
         $user->status = 0;    

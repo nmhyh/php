@@ -14,32 +14,19 @@ use DB;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
 
-    public $viewprefix;
-    public $viewnamespace;
-    public $middleware;
     public function __construct()
     {
-        // $this->middleware('CheckAdminLogin');
         $this->viewprefix='admin.product.';
         $this->viewnamespace='admin/product';
     }
+    
     public function index()
     {
-        $products = Product::all();
+        $products = Product::paginate(5);
         return view($this->viewprefix.'index', compact('products'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $category = Category::all();
@@ -48,12 +35,6 @@ class ProductController extends Controller
         return view($this->viewprefix.'add',compact('category', 'brand', 'size'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
         $product = new Product();
@@ -63,7 +44,6 @@ class ProductController extends Controller
         ]);
         $product->name = $request->name;
         $product->price = $request->price;
-        $product->size = $request->size;
         $product->material = $request->material;
         $product->strap_material = $request->strap_material;
         $product->locktype = $request->locktype;
@@ -90,6 +70,7 @@ class ProductController extends Controller
             Session::flash('message', 'Failure!');
         return redirect()->route('admin-product-index');
     }
+
     public function getedit($id)
     {
         $category = Category::all();
@@ -98,6 +79,7 @@ class ProductController extends Controller
         $products = Product::findOrFail($id);
         return view($this->viewprefix.'edit')->with('product', $products)->with('category', $category)->with('brand', $brand)->with('size', $size);      
     }
+
     public function postedit($id, request $request)
     {
         $product = Product::findOrFail($id);
@@ -107,7 +89,6 @@ class ProductController extends Controller
         ]);
         $product->name = $request->name;
         $product->price = $request->price;
-        $product->size = $request->size;
         $product->material = $request->material;
         $product->strap_material = $request->strap_material;
         $product->locktype = $request->locktype;
@@ -137,46 +118,6 @@ class ProductController extends Controller
         return redirect()->route('admin-product-index'); 
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Product $product)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Product $product)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Product  $product
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         $products = Product::findOrFail($id); 
@@ -186,6 +127,7 @@ class ProductController extends Controller
             Session::flash('message', 'Failure!');
         return redirect()->route('admin-product-index'); 
     }
+
     public function active($id)
     {
         $product = Product::findOrFail($id);
@@ -195,7 +137,9 @@ class ProductController extends Controller
         else
             Session::flash('message', 'Failure!');
         return redirect()->route('admin-product-index');        
-    }public function unactive($id)
+    }
+    
+    public function unactive($id)
     {
         $product = Product::findOrFail($id); 
         $product->status = 0;    
@@ -209,6 +153,7 @@ class ProductController extends Controller
     // Hàm client
     public function product_detail($id)
     {
+        $product_5 = DB::table('product')->where('status', '1')->orderby('id', 'asc')->limit(5)->get();
         $category = DB::table('category')->where('status', '1')->get();
         $brand = DB::table('brand')->where('status', '1')->get();
 
@@ -225,7 +170,7 @@ class ProductController extends Controller
         $related_product = DB::table('product')->select('product.id', 'product.name', 'product.image','product.price',)->join('category', 'category.id', '=', 'product.idcat')->join('brand', 'brand.id', '=', 'product.idbra')->join('size', 'size.id', '=', 'product.idsize')->where('category.id', $category_id)->whereNotIn('product.id', [$id])->limit(4)->get();
         
 
-        return view('client.home.product_detail')->with('category', $category)->with('brand', $brand)->with('product_detail', $product_detail)->with('related_product', $related_product);
+        return view('client.home.product_detail')->with('category', $category)->with('brand', $brand)->with('product_detail', $product_detail)->with('related_product', $related_product)->with('product_5', $product_5);
     }
 
 }
